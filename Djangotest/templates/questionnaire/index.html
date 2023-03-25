@@ -1,10 +1,17 @@
-POLLS
-<!-- {% if latest_question_list %}
-    <ul>
+{% extends 'base.html' %} 
+{% block content %} 
+  <h1 class="text-center mb-3">Poll Questions</h1>
+  {% if latest_question_list %}
     {% for question in latest_question_list %}
-        <li><a href="/polls/{{ question.id }}/">{{ question.question_text }}</a></li>
+      <div class="card mb-3">
+        <div class="card-body">
+          <p class="lead">{{ question.question_text }}</p>
+          <a href="{% url 'questionnaire:detail' question.id %}" class="btn btn-primary btn-sm">Vote Now</a>
+          <a href="{% url 'questionnaire:results' question.id %}" class="btn btn-secondary btn-sm">Results</a>
+        </div>
+      </div>
     {% endfor %}
-    </ul>
-{% else %}
-    <p>No polls are available.</p>
-{% endif %} -->
+  {% else %}
+    <p>No polls available</p>
+  {% endif %}
+{% endblock %}
